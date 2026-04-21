@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@700&display=swap");
+
+/*font-family: "Playfair Display", serif;*/
+/*font-family: "Poppins", sans-serif;*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 6px -6px gray;
+  --webkit-box-shadow: 0 8px 6px -6px gray;
+  border-bottom: solid #fa7070 !important;
+}
+
+.nav-link {
+  font-weight: 300 !important;
+}
+.active {
+  border-bottom: 2px solid black;
+}
+.navbar-brand {
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 3px;
+}
+
+/* Footer Css*/
+.footer {
+  color: black;
+  padding: 14px;
+  background-color: #fa7070;
+}
+.footer a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+
+.footer a:hover {
+  color: black;
+  border-bottom: 2px solid black;
+}
+
+/* Page not found Css*/
+.pnf {
+  display: flex;
+  min-height: 65vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.pnf-title {
+  font-size: 100px;
+  font-weight: 700;
+}
+.pnf-heading {
+  font-weight: normal;
+}
+.pnf-btn {
+  color: black;
+  border: 2px solid black;
+  text-decoration: none;
+  padding: 10px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+.pnf a:hover {
+  background-color: #fa7070;
+  color: white;
+}
+
+/* Contact us Css*/
+.contact-us {
+  margin: 0;
+  padding: 0;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-img {
+  width: 65%;
+  border-radius: 10px;
+}
+.contact-icon {
+  font-size: 20px;
+}
+.contact-line {
+  font-size: 18px;
+}
+@media screen and (min-width: 600px) {
+  .contact-img {
+    width: 80%;
+    border-radius: 25px;
+  }
+  .contact-line {
+    font-size: 20px;
+  }
+}
+/* About us Css*/
+.about-us {
+  margin: 10px;
+  padding: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-img {
+  width: 65%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.about-line {
+  font-size: 18px;
+}
+@media screen and (min-width: 600px) {
+  .about-img {
+    width: 80%;
+    border-radius: 25px;
+  }
+  .about-line {
+    font-size: 20px;
+  }
+}
+
+/* Privacy policy Css*/
+.policy {
+  margin: 10px;
+  padding: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.policy-img {
+  width: 65%;
+  border-radius: 10px;
+}
+.policy-line {
+  font-size: 18px;
+}
+@media screen and (min-width: 600px) {
+  .policy-img {
+    width: 80%;
+    border-radius: 25px;
+  }
+  .about-line {
+    font-size: 20px;
+  }
+}
+/* Register Page Css
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  flex-direction: column;
+}
+.form-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.product-link {
+  text-decoration: none !important;
+  color: black;
+}
