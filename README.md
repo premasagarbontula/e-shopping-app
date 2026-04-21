@@ -43,12 +43,16 @@ Live Demo: https://e-shopping-app-wiyh.onrender.com
 
 - Home / Product Listing
   - ![placeholder-home](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/home.png)
+    
 - Product Details
   - ![placeholder-product](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/details.png)
+    
 - Cart
   - ![placeholder-cart](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/cart.png)
+    
 - Admin Dashboard
   - ![placeholder-admin](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/admin.png)
+    
 - Register page
   - ![placeholder-register](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/register.png)
 
