@@ -2,7 +2,7 @@
 
 Production-ready MERN e-commerce application providing user authentication, role-based access (admin/user), product catalog with search/suggestions, cart management, order placement, and an admin dashboard for managing users and products.
 
-Live Demo: https://your-demo-url.example.com (placeholder)
+Live Demo: https://e-shopping-app-wiyh.onrender.com
 
 ---
 
@@ -42,7 +42,7 @@ Live Demo: https://your-demo-url.example.com (placeholder)
 ## Screenshots
 
 - Home / Product Listing
-  - ![placeholder-home](./screenshots/home.png)
+  - ![placeholder-home](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/home.png)
 - Product Details / Cart
   - ![placeholder-product](./screenshots/product.png)
 - Admin Dashboard
