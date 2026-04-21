@@ -1,4 +1,4 @@
-# Eshopping App (MERN) 🚀
+# E-shopping App (MERN) 🚀
 
 Production-ready MERN e-shopping application providing user authentication, role-based access (admin/user), product catalog with search/suggestions, cart management, order placement, and an admin dashboard for managing users and products.
 
