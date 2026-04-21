@@ -2,12 +2,15 @@ import express from "express";
 import {
   registerController,
   loginController,
-  testController,
   forgotPasswordController,
   updateProfileController,
-  getOrdersController,
+  getUserOrdersController,
   getAllOrdersController,
   orderStatusController,
+  authController,
+  allUsersController,
+  toggleAdminPermissionController,
+  toggleUserStatusController,
 } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 
@@ -24,13 +27,8 @@ router.post("/login", loginController);
 //Forgot password || POST
 router.post("/forgot-password", forgotPasswordController);
 
-//test routes
-router.get("/test", requireSignIn, isAdmin, testController);
-
 //protected user route auth
-router.get("/user-auth", requireSignIn, (req, res) => {
-  res.status(200).send({ ok: true });
-});
+router.get("/user-auth", requireSignIn, authController);
 
 //protected Admin route auth
 router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
@@ -40,10 +38,10 @@ router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
 //update profile
 router.put("/profile", requireSignIn, updateProfileController);
 
-//orders
-router.get("/orders", requireSignIn, getOrdersController);
+//User - orders
+router.get("/orders", requireSignIn, getUserOrdersController);
 
-//all orders
+//Admin - all orders
 router.get("/all-orders", requireSignIn, isAdmin, getAllOrdersController);
 
 //order status update (shown in admin dashboard=>orders)
@@ -51,7 +49,25 @@ router.put(
   "/order-status/:orderId",
   requireSignIn,
   isAdmin,
-  orderStatusController
+  orderStatusController,
 );
 
+//get users (To show in Admin dashboard)
+router.get("/all-users", requireSignIn, isAdmin, allUsersController);
+
+//Make a user as an Admin
+router.patch(
+  "/users/:id/toggle-role",
+  requireSignIn,
+  isAdmin,
+  toggleAdminPermissionController,
+);
+
+//activate or deactivate user
+router.patch(
+  "/users/:id/toggle-status",
+  requireSignIn,
+  isAdmin,
+  toggleUserStatusController,
+);
 export default router;

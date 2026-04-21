@@ -1,7 +1,7 @@
 import express from "express";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import {
-  categoryController,
+  getAllCategoryController,
   createCategoryController,
   deleteCategoryController,
   singleCategoryController,
@@ -16,7 +16,7 @@ router.post(
   "/create-category",
   requireSignIn,
   isAdmin,
-  createCategoryController
+  createCategoryController,
 );
 
 //update category
@@ -24,21 +24,21 @@ router.put(
   "/update-category/:id",
   requireSignIn,
   isAdmin,
-  updateCategoryController
+  updateCategoryController,
 );
 
-//get all category (no need of 'requireSignIn' and 'isAdmin', categories should be visible to all)
-router.get("/get-category", categoryController);
+//get all category
+router.get("/get-category", getAllCategoryController);
 
-//single category (no need of authentication)
+//single category
 router.get("/single-category/:slug", singleCategoryController); //we use slug instead of id
 
-//delete category (need of authentication)
+//delete category
 router.delete(
   "/delete-category/:id",
   requireSignIn,
   isAdmin,
-  deleteCategoryController
+  deleteCategoryController,
 );
 
 export default router;

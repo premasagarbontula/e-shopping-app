@@ -4,8 +4,11 @@ const orderSchema = new mongoose.Schema(
   {
     products: [
       {
-        type: mongoose.ObjectId,
-        ref: "products", //from product model
+        product: {
+          type: mongoose.ObjectId,
+          ref: "products",
+        },
+        quantity: Number,
       },
     ],
     payment: {},
@@ -16,16 +19,19 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "Not Processed",
-      enum: [
-        "Not Processed",
-        "Processing",
-        "Shipped",
-        "Delivered",
-        "Cancelled",
-      ],
+      enum: {
+        values: [
+          "Not Processed",
+          "Processing",
+          "Shipped",
+          "Delivered",
+          "Cancelled",
+        ],
+        message: "{VALUE} is not a valid order status!",
+      },
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("order", orderSchema);

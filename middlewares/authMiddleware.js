@@ -1,33 +1,58 @@
-import JWT from 'jsonwebtoken'
-import userModel from '../models/userModel.js'
+import JWT from "jsonwebtoken";
+import userModel from "../models/userModel.js";
 
-export const requireSignIn = async (req,res,next) =>{
-    try {
-        const decode = JWT.verify(req.headers.authorization,process.env.JWT_SECRET)
-        req.user = decode
-        next()
-    } catch (error) {
-        console.log(error)
+// Middleware to check if user is signed in using JWT
+export const requireSignIn = async (req, res, next) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).send({
+        success: false,
+        message: "Unauthorized",
+      });
     }
-}
 
-export const isAdmin = async(req,res,next) =>{
-    try {
-        const user = await userModel.findById(req.user._id)
-        if (user.role !== 1){
-            return res.status(401).send({
-                success:false,
-                message:"Unauthorized Access"
-            })
-        }else{
-            next()
-        }
-    } catch (error) {
-        console.log(error)
-        res.status(401).send({
-            success:false,
-            error,
-            message:"Error in Admin Middleware"
-        })
+    const decode = JWT.verify(token, process.env.JWT_SECRET);
+
+    // Fetch user here
+    const user = await userModel
+      .findById(decode._id)
+      .select("-password -answer");
+
+    if (!user) {
+      return res.status(401).send({
+        success: false,
+        message: "Unauthorized",
+      });
     }
-}
+    if (!user.isActive) {
+      return res.status(403).send({
+        success: false,
+        message: "Account is deactivated. Contact admin.",
+      });
+    }
+    // Attach full user
+    req.user = user;
+    next();
+  } catch (error) {
+    console.log("Auth error:", error);
+    return res.status(401).send({
+      success: false,
+      message: "Unauthorized",
+    });
+  }
+};
+
+// Middleware to check if signed in user is an admin
+export const isAdmin = (req, res, next) => {
+  const isAdminUser = req.user?.role === "admin";
+
+  if (!isAdminUser) {
+    return res.status(403).send({
+      success: false,
+      message: "Unauthorized Access",
+    });
+  }
+
+  next();
+};

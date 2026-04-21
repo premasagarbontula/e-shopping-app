@@ -1,8 +1,6 @@
 import express from "express";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import {
-  braintreePaymentsController,
-  braintreeTokenController,
   createProductController,
   deleteProductController,
   getProductsController,
@@ -10,33 +8,26 @@ import {
   productCategoryController,
   productCountController,
   productFiltersController,
-  productImageController,
   productListController,
   searchProductController,
   similarProductController,
   updateProductController,
+  createPaymentIntentController,
+  saveOrderController,
+  checkStockBulkController,
 } from "../controllers/productController.js";
-import formidable from "express-formidable";
-import braintree from "braintree";
 
 const router = express.Router();
 
 //routes
-router.post(
-  "/create-product",
-  requireSignIn,
-  isAdmin,
-  formidable(),
-  createProductController
-);
+router.post("/create-product", requireSignIn, isAdmin, createProductController);
 
 //update product
 router.put(
   "/update-product/:pid",
   requireSignIn,
   isAdmin,
-  formidable(),
-  updateProductController
+  updateProductController,
 );
 
 //get products
@@ -45,11 +36,13 @@ router.get("/get-products", getProductsController);
 //get single product
 router.get("/get-product/:slug", getSingleProductController);
 
-//get image route. beacuse we used select("-image") in productController. so we create seperate API for image
-router.get("/product-image/:pid", productImageController);
-
 //delete product
-router.delete("/delete-product/:pid", deleteProductController);
+router.delete(
+  "/delete-product/:pid",
+  requireSignIn,
+  isAdmin,
+  deleteProductController,
+);
 
 //filter product (SERVER SIDE FILTERING)
 router.post("/product-filters", productFiltersController); //post because we passing data
@@ -64,16 +57,23 @@ router.get("/product-list/:page", productListController);
 router.get("/search/:keyword", searchProductController);
 
 //similar product
-router.get("/similar-products/:pid/:cid", similarProductController); //pid is used not to show that particular product in related products again
+router.get("/similar-products/:pid?/:cid", similarProductController); //pid is used not to show that particular product in similar products again
 
 //category wise products
 router.get("/product-category/:slug", productCategoryController);
 
-//payments routes
-//token
-router.get("/braintree/token", braintreeTokenController);
+//check Stock
+router.post("/check-stock-bulk", requireSignIn, checkStockBulkController);
 
-//payments
-router.post("/braintree/payment", requireSignIn, braintreePaymentsController);
-//Formidable is a Node.js module for parsing form data, including multipart/form-data file upload.
+//payments routes
+// create payment intent
+router.post(
+  "/stripe/create-payment-intent",
+  requireSignIn,
+  createPaymentIntentController,
+);
+
+// save order
+router.post("/stripe/save-order", requireSignIn, saveOrderController);
+
 export default router;
