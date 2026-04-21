@@ -1,6 +1,6 @@
-# Ecommerce App (MERN) 🚀
+# Eshopping App (MERN) 🚀
 
-Production-ready MERN e-commerce application providing user authentication, role-based access (admin/user), product catalog with search/suggestions, cart management, order placement, and an admin dashboard for managing users and products.
+Production-ready MERN e-shopping application providing user authentication, role-based access (admin/user), product catalog with search/suggestions, cart management, order placement, and an admin dashboard for managing users and products.
 
 Live Demo: https://e-shopping-app-wiyh.onrender.com
 
@@ -43,12 +43,14 @@ Live Demo: https://e-shopping-app-wiyh.onrender.com
 
 - Home / Product Listing
   - ![placeholder-home](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/home.png)
-- Product Details / Cart
-  - ![placeholder-product](./screenshots/product.png)
+- Product Details
+  - ![placeholder-product](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/details.png)
+- Cart
+  - ![placeholder-cart](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/cart.png)
 - Admin Dashboard
-  - ![placeholder-admin](./screenshots/admin.png)
-
-(Replace placeholders with actual screenshots in /screenshots)
+  - ![placeholder-admin](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/admin.png)
+- Register page
+  - ![placeholder-register](https://github.com/premasagarbontula/e-shopping-app/blob/main/client/src/assets/register.png)
 
 ---
 
@@ -145,7 +147,6 @@ Prerequisites:
 Backend (.env)
 
 ```env
-// filepath: d:\CCBP\Resume Projects\Ecommerce App 2026\.env
 PORT=8080
 MONGO_URI=mongodb+srv://<user>:<password>@cluster0.mongodb.net/dbname
 JWT_SECRET=your_jwt_secret_here
@@ -222,6 +223,14 @@ Note: Additional routes for cart, orders, user management and Stripe payments ex
 - Fork the repo → create feature branch → open PR with clear description and tests.
 - Follow commit message conventions and code style.
 - Open issues for major changes before implementing.
+
+---
+
+## Author
+
+Prema Sagar B  
+Email: prem.b.sagar@gmail.com  
+GitHub: https://github.com/premasagarbontula
 
 ---
 
