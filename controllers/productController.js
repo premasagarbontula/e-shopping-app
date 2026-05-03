@@ -595,21 +595,21 @@ export const checkStockBulkController = async (req, res) => {
       });
     }
 
-    // ✅ Collect all product IDs
+    // Collect all product IDs
     const productIds = cart.map((item) => item._id);
 
-    // ✅ Fetch all products in one query (OPTIMIZED)
+    // Fetch all products in one query
     const products = await productModel.find({
       _id: { $in: productIds },
     });
 
-    // ✅ Create map for quick lookup
+    // Create map for quick lookup
     const productMap = {};
     products.forEach((p) => {
       productMap[p._id.toString()] = p;
     });
 
-    // ✅ Validate each cart item
+    // Validate each cart item
     for (const item of cart) {
       const product = productMap[item._id];
 
@@ -637,7 +637,7 @@ export const checkStockBulkController = async (req, res) => {
       }
     }
 
-    // ✅ All good
+    
     return res.status(200).json({
       success: true,
       message: "Stock available",
@@ -661,7 +661,7 @@ export const createPaymentIntentController = async (req, res) => {
     // calculate total
     let total = 0;
     cart.forEach((item) => {
-      total += item.price;
+      total += item.price * item.quantity;
     });
 
     const paymentIntent = await stripe.paymentIntents.create({
@@ -687,7 +687,7 @@ export const saveOrderController = async (req, res) => {
   try {
     const { cart, paymentIntent } = req.body;
 
-    // ✅ 1. Validate payment
+    // Validate payment
     if (!paymentIntent || paymentIntent.status !== "succeeded") {
       return res.status(400).json({
         success: false,
@@ -695,7 +695,7 @@ export const saveOrderController = async (req, res) => {
       });
     }
 
-    // ✅ 2. STOCK CHECK (VERY IMPORTANT)
+    // STOCK CHECK (VERY IMPORTANT)
     for (const item of cart) {
       const product = await productModel.findById(item._id);
 
@@ -715,7 +715,7 @@ export const saveOrderController = async (req, res) => {
       }
     }
 
-    // ✅ 3. CREATE ORDER
+    // CREATE ORDER
     const newOrder = await new orderModel({
       products: cart.map((item) => ({
         product: item._id,
@@ -725,7 +725,7 @@ export const saveOrderController = async (req, res) => {
       buyer: req.user._id,
     }).save();
 
-    // ✅ 4. DECREMENT STOCK
+    // DECREMENT STOCK
     for (const item of cart) {
       await productModel.findByIdAndUpdate(
         item._id,
@@ -734,7 +734,7 @@ export const saveOrderController = async (req, res) => {
       );
     }
 
-    // ✅ 5. RESPONSE
+    // RESPONSE
     res.status(200).json({
       success: true,
       message: "Order placed successfully",
