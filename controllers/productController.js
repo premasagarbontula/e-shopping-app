@@ -695,21 +695,31 @@ export const saveOrderController = async (req, res) => {
       });
     }
 
-    // STOCK CHECK (VERY IMPORTANT)
+    // STOCK CHECK
     for (const item of cart) {
       const product = await productModel.findById(item._id);
 
+      // product deleted after payment
       if (!product) {
+        await stripe.refunds.create({
+          payment_intent: paymentIntent.id,
+        });
+
         return res.status(404).json({
           success: false,
-          message: `Product not found`,
+          message: "Product not found. Payment refunded.",
         });
       }
 
+      // stock unavailable after payment
       if (product.quantity < item.quantity) {
+        await stripe.refunds.create({
+          payment_intent: paymentIntent.id,
+        });
+
         return res.status(400).json({
           success: false,
-          message: `${product.name} is out of stock`,
+          message: `${product.name} is out of stock. Payment refunded.`,
           available: product.quantity,
         });
       }
@@ -734,7 +744,6 @@ export const saveOrderController = async (req, res) => {
       );
     }
 
-    // RESPONSE
     res.status(200).json({
       success: true,
       message: "Order placed successfully",
