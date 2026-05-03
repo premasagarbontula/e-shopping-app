@@ -99,6 +99,7 @@ const AdminOrders = () => {
                           <th className="p-2">Date</th>
                           <th className="p-2">Payment</th>
                           <th className="p-2">Total Qty</th>
+                          <th className="p-2">Total Amount</th>
                         </tr>
                       </thead>
 
@@ -131,6 +132,7 @@ const AdminOrders = () => {
                           </td>
 
                           <td className="p-2">{totalQty}</td>
+                          <td className="p-2">Rs {o?.payment?.amount / 100}</td>
                         </tr>
                       </tbody>
                     </table>
