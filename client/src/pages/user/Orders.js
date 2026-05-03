@@ -76,6 +76,7 @@ const Orders = () => {
                           <th className="p-2">Date</th>
                           <th className="p-2">Payment</th>
                           <th className="p-2">Total Qty</th>
+                          <th className="p-2">Total Amount</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -90,6 +91,7 @@ const Orders = () => {
                             {paymentStatus(o?.payment?.status)}
                           </td>
                           <td className="p-2">{totalQty}</td>
+                          <td className="p-2">Rs {o?.payment?.amount / 100}</td>
                         </tr>
                       </tbody>
                     </table>
