@@ -39,6 +39,8 @@ app.use(cookieParser());
 //Express needs to serve the build folder when users hit your server
 app.use(express.static(path.join(__dirname, "./client/build")));
 
+app.get("/health", (req, res) => res.send("OK"));
+
 //routes
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/category", categoryRoute);
