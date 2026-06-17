@@ -1,8 +1,14 @@
 # E-shopping App (MERN) 🚀
 
-Production-ready MERN e-shopping application providing user authentication, role-based access (admin/user), product catalog with search/suggestions, cart management, order placement, and an admin dashboard for managing users and products.
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success)](https://e-shopping-app-wiyh.onrender.com)
 
-Live Demo: https://e-shopping-app-wiyh.onrender.com
+## Demo Credentials
+
+**Email:** test@user.com  
+**Password:** Test@1234
+> Note: Demo account has limited permissions and is intended for evaluation purposes.
+
+Production-ready MERN e-shopping application providing user authentication, role-based access (admin/user), product catalog with search/suggestions, cart management, order placement, and an admin dashboard for managing users and products.
 
 ---
 
